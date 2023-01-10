@@ -18,8 +18,9 @@ public class Backward extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public Backward(DriveBase subsystem) {
+  public Backward(DriveBase db, double inches) {
     m_db = subsystem;
+    kTargetDistance = inches;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -28,6 +29,7 @@ public class Backward extends CommandBase {
   @Override
   public void initialize() {
     m_db.resetEncoders();
+    m_db.arcadeDrive(0,0);
     m_startingDistance = m_db.getAverageDistance(); 
   }
 
