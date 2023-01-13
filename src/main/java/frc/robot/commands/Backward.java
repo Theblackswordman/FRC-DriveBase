@@ -10,16 +10,16 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 /** An example command that uses an example subsystem. */
 public class Backward extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final DriveBase m_subsystem;
-  private final double kTargetDistance = -3.0; //inches
-  private double m_startingDistance;
+  private final DriveBase m_drivebase;
+  private double kTargetDistance = -3.0; //inches
+  // private double m_startingDistance;
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
   public Backward(DriveBase db, double inches) {
-    m_db = subsystem;
+    m_drivebase = db;
     kTargetDistance = inches;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -29,8 +29,9 @@ public class Backward extends CommandBase {
   @Override
   public void initialize() {
     m_db.resetEncoders();
-    m_db.arcadeDrive(0,0);
-    m_startingDistance = m_db.getAverageDistance(); 
+
+    // m_db.arcadeDrive(0,0);
+    // m_startingDistance = m_db.getAverageDistance(); 
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -49,6 +50,11 @@ public class Backward extends CommandBase {
   @Override
   public boolean isFinished() {
     double currentDistance = m_db.getAverageDistance();
-    return (m_startingDistance + kTargetDistance);
+    if(currentDistance < kTargetDistance){
+      return true;
+    }
+
+
+    // return (m_startingDistance + kTargetDistance);
   }
 }

@@ -14,7 +14,6 @@ import com.revrobotics.SparkMaxAlternateEncoder.Type;
 
 public class DriveBase extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  private final int = 1000
 
   public DriveBase() {
 
